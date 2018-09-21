@@ -1,0 +1,106 @@
+{
+  "name": "react-dashboard-admin",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "ncu": "ncu -a",
+    "start": "node scripts/start.js",
+    "build": "node scripts/build.js",
+    "test": "node scripts/test.js --env=jsdom",
+    "lint": "eslint scripts/start.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.0",
+    "@babel/plugin-proposal-do-expressions": "^7.0.0",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0",
+    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
+    "@babel/plugin-proposal-function-sent": "^7.1.0",
+    "@babel/plugin-proposal-json-strings": "^7.0.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
+    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
+    "@babel/plugin-syntax-import-meta": "^7.0.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "analyze-webpack-plugin": "^0.2.5",
+    "autoprefixer": "^9.1.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^9.0.0",
+    "babel-loader": "^8.0.2",
+    "babel-plugin-import": "^1.9.1",
+    "case-sensitive-paths-webpack-plugin": "^2.1.2",
+    "chalk": "^2.4.1",
+    "css-loader": "^1.0.0",
+    "cssnano": "^4.1.0",
+    "dotenv": "^6.0.0",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-babel": "^5.2.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^2.0.0",
+    "fs-extra": "^7.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^23.6.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "mini-css-extract-plugin": "^0.4.3",
+    "node-sass": "^4.9.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "react-dev-utils": "^6.0.0-next.3e165448",
+    "sass": "^1.14.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.0",
+    "sw-precache-webpack-plugin": "^0.11.5",
+    "url-loader": "^1.1.1",
+    "webpack": "^4.19.1",
+    "webpack-bundle-analyzer": "^3.0.2",
+    "webpack-dev-server": "^3.1.8",
+    "webpack-manifest-plugin": "^2.0.4",
+    "webpack-merge": "^4.1.4"
+  },
+  "browserslist": [
+    ">1%",
+    "last 4 versions",
+    "Firefox ESR",
+    "not ie < 9"
+  ],
+  "proxy": {
+    "/api": {
+      "target": "<url_1>",
+      "ws": true
+    },
+    "/foo": {
+      "target": "<url_2>",
+      "ssl": true,
+      "pathRewrite": {
+        "^/foo": "/foo/beta"
+      }
+    },
+    "/bar/[^/]*[.]html": {
+      "target": "<url_3>"
+    },
+    "/baz/.*/.*[.]html": {
+      "target": "<url_4>"
+    }
+  }
+}
