@@ -7,13 +7,13 @@
     "ncu": "ncu -a",
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint scripts/start.js"
+    "test": "node scripts/test.js --env=jsdom"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.11",
+    "prop-types": "^15.6.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },

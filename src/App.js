@@ -1,25 +1,46 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import PropTypes from 'prop-types';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">
-Welcome to React sdfa
-      </h1>
-    </header>
-    <p className="App-intro">
-      To get started, edit
-      {' '}
-      <code>
-src/App.js
-      </code>
-      {' '}
-and save to reload.
-    </p>
-  </div>
-);
+function formatDate(date) {
+  return date.toLocaleDateString();
+}
+function Avatar(props) {
+  // eslint-disable-next-line
+  const { user } = props;
+  return <img className="Avatar" src={user.avatarUrl} alt={user.name} />;
+}
 
-export default App;
+Avatar.defaultProps = {
+  user: {}
+};
+
+function Comment(props) {
+  const { author, text, date } = props;
+  return (
+    <div className="Comment">
+      <div className="UserInfo">
+        <Avatar user={author} />
+        <div className="UserInfo-name">{author.name}</div>
+      </div>
+      <div className="Comment-text">{text}</div>
+      <div className="Comment-date">{formatDate(date)}</div>
+    </div>
+  );
+}
+
+Comment.propTypes = {
+  author: PropTypes.shape({
+    name: PropTypes.string,
+    avatarUrl: PropTypes.string
+  }),
+  text: PropTypes.string,
+  date: PropTypes.instanceOf(Date)
+};
+
+Comment.defaultProps = {
+  author: {},
+  text: '',
+  date: new Date()
+};
+
+export default Comment;
