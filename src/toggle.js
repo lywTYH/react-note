@@ -1,4 +1,5 @@
 import React from 'react';
+import ProtoTypes from 'prop-types';
 
 class Toggle extends React.Component {
   constructor(props) {
