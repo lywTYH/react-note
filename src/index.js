@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Clock from './Clock';
+import Toggle from './toggle';
 
-ReactDOM.render(<Clock />, document.getElementById('root'));
+function App() {
+  return <Toggle />;
+}
+ReactDOM.render(<App />, document.getElementById('root'));
