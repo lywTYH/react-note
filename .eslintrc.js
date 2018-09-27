@@ -21,6 +21,7 @@ module.exports = {
     quotes: ['error', 'single'],
     'linebreak-style': ['error', 'unix'],
     indent: ['error', 2, { SwitchCase: 1 }],
+    'prefer-destructuring': 'off',
     // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
     'comma-dangle': [2, 'never'],
     'no-multi-spaces': 1,

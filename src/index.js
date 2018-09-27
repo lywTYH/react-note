@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Toggle from './toggle';
+import NameForm from './form';
 
 function App() {
-  return <Toggle />;
+  return <NameForm />;
 }
 ReactDOM.render(<App />, document.getElementById('root'));
