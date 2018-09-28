@@ -2,9 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import NameForm from './form';
 // import Calculator from './calculator';
-import Board from './game';
+// import Board from './game';
+import News from './immutability';
+import store from './store';
 
-function App() {
-  return <Board />;
+function render() {
+  ReactDOM.render(<News news={store.getState()} />, document.getElementById('root'));
 }
-ReactDOM.render(<App />, document.getElementById('root'));
+store.subscribe(render);
+render();
