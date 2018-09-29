@@ -40,7 +40,7 @@ const lessUse = [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, ...post
 module.exports = {
   output: {
     path: paths.appBuild,
-    pathinfo: true, // 告诉 webpack 在 bundle 中引入「所包含模块信息」的相关注
+    pathinfo: true,
     publicPath,
     devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
   },
@@ -73,19 +73,13 @@ module.exports = {
       chunkFilename: 'static/css/[name].[chunkhash:8].chunk.css'
     }),
     new InterpolateHtmlPlugin(env.raw),
-    // 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。作用没理解~
-    // new webpack.NamedModulesPlugin(),
     // 区别开发模式和发布模式的全局变量
     new webpack.DefinePlugin(env.stringified),
-    // 在 npm install 新的依赖后自动刷新
-    // new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-    // 优化 moment.js 库的体积，https://github.com/jmblog/how-to-optimize-momentjs-with-webpack
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
   ],
   module: {
     strictExportPresence: true,
     rules: [
-      // 在 babel 解析前进行 eslint 校验
       {
         test: /\.(js|jsx)$/,
         enforce: 'pre',

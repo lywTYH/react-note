@@ -13,7 +13,6 @@ const paths = require('./paths');
 const webpackConfig = merge(
   {
     mode: 'production',
-    // 当 webpack 遇到第一个错，标红抛出并中断运行
     bail: true,
     devtool: false,
     entry: [paths.appIndexJs],
