@@ -24,6 +24,7 @@ module.exports = {
     // 数组和对象键值对最后一个逗号， never参数：不能带末尾的逗号, always参数：必须带末尾的逗号，
     'comma-dangle': [2, 'never'],
     'no-multi-spaces': 1,
+    'react/destructuring-assignment': 0,
     'react/jsx-tag-spacing': 1, // 总是在自动关闭的标签前加一个空格，正常情况下也不需要换行
     'jsx-quotes': 1,
     'react/jsx-closing-bracket-location': 1, // 遵循JSX语法缩进/格式
