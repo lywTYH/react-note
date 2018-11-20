@@ -1,29 +1,40 @@
-export default class ThemeSwitch extends Component {
-  static contextTypes = {
-    store: PropTypes.object
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from './connect';
+
+class ThemeSwitch extends Component {
+  static propTypes = {
+    themeColor: PropTypes.string,
+    onSwitchColor: PropTypes.func
   }
 
-  constructor() {
-    super();
-    this.state = { themeColor: '' };
+  handleSwitchColor(color) {
+    if (this.props.onSwitchColor) {
+      this.props.onSwitchColor(color);
+    }
   }
 
-  componentWillMount() {
-    this._updateThemeColor();
-  }
-
-  _updateThemeColor() {
-    const { store } = this.context;
-    const state = store.getState();
-    this.setState({ themeColor: state.themeColor });
-  }
 
   render() {
     return (
       <div>
-        <button style={{ color: this.state.themeColor }}>Red</button>
-        <button style={{ color: this.state.themeColor }}>Blue</button>
+        <div>
+          <button style={{ color: this.props.themeColor }} onClick={this.handleSwitchColor.bind(this, 'red')}>Red</button>
+          <button style={{ color: this.props.themeColor }} onClick={this.handleSwitchColor.bind(this, 'blue')}>Blue</button>
+        </div>
       </div>
     );
   }
 }
+const mapStateToProps = (state) => ({
+  themeColor: state.themeColor
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onSwitchColor: (color) => {
+    dispatch({ type: 'CHANGE_COLOR', themeColor: color });
+  }
+});
+const ThemeSwitchView = connect(mapStateToProps, mapDispatchToProps)(ThemeSwitch);
+
+export default ThemeSwitchView;
