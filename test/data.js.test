@@ -1,0 +1,15 @@
+autoHideHeader: false
+children: {$$typeof: Symbol(react.element), type: ƒ, key: null, ref: null, props: {…}, …}
+collapsed: true
+contentWidth: "Fluid"
+dispatch: ƒ (action)
+fixSiderbar: false
+fixedHeader: false
+history: {length: 1, action: "POP", location: {…}, createHref: ƒ, push: ƒ, …}
+layout: "sidemenu"
+location: {pathname: "/dashboard/analysis", search: "", hash: "", query: {…}, state: undefined, …}
+match: {path: "/", url: "/", isExact: false, params: {…}}
+navTheme: "dark"
+primaryColor: "#1890FF"
+route: {path: "/", component: ƒ, Routes: Array(1), authority: Array(2), routes: Array(10)}
+staticContext: undefined

@@ -6,6 +6,7 @@ const webpack = require('webpack');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
@@ -13,13 +14,27 @@ const paths = require('./paths');
 const env = getClientEnvironment();
 
 const devMode = env.stringified['process.env'].NODE_ENV !== '"production"';
-const publicPath = devMode ? env.raw.PUBLIC_URL : '/';
 
 const postCss = [
   {
     loader: require.resolve('css-loader'),
     options: {
-      importLoaders: 1
+      modules: true,
+      getLocalIdent: (context, localIdentName, localName) => {
+        if (context.resourcePath.includes('node_modules')) {
+          return localName;
+        }
+        const match = context.resourcePath.match(/src(.*)/);
+        if (match && match[1]) {
+          const stylePath = match[1].replace(/\.(sa|sc|c)ss$/, '');
+          const arr = stylePath
+            .split('/')
+            .map(a => a.replace(/([A-Z])/g, '-$1'))
+            .map(a => a.toLowerCase());
+          return `admin${arr.join('-')}-${localName}`.replace(/--/g, '-');
+        }
+        return localName;
+      }
     }
   },
   {
@@ -34,15 +49,23 @@ const postCss = [
     }
   }
 ];
-const sassUse = [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, ...postCss, 'sass-loader'];
-const lessUse = [devMode ? 'style-loader' : MiniCssExtractPlugin.loader, ...postCss, 'less-loader'];
-
+const sassUse = [
+  devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  ...postCss,
+  'sass-loader'
+];
+const lessUse = [
+  devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+  ...postCss,
+  'less-loader'
+];
 module.exports = {
   output: {
     path: paths.appBuild,
     pathinfo: true,
-    publicPath,
-    devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
+    publicPath: env.raw.PUBLIC_URL,
+    devtoolModuleFilenameTemplate: info =>
+      path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')
   },
   resolve: {
     modules: ['node_modules', paths.appNodeModules].concat(
@@ -51,15 +74,8 @@ module.exports = {
     ),
     extensions: ['.js', '.json', '.jsx'],
     alias: {
-      components: `${path.resolve(__dirname, '..')}/src/common/components`,
-      container: `${path.resolve(__dirname, '..')}/src/common/container`,
-      images: `${path.resolve(__dirname, '..')}/src/common/images`,
-      pages: `${path.resolve(__dirname, '..')}/src/common/pages`,
-      utils: `${path.resolve(__dirname, '..')}/src/common/utils`,
-      data: `${path.resolve(__dirname, '..')}/src/server/data`,
-      actions: `${path.resolve(__dirname, '..')}/src/common/actions`,
-      reducers: `${path.resolve(__dirname, '..')}/src/common/reducers`,
-      api: `${path.resolve(__dirname, '..')}/src/common/api`
+      '@': path.resolve(__dirname, '..', 'src'),
+      scss: path.resolve(__dirname, '..', 'src', 'scss')
     },
     plugins: [
       // 该插件把模块作用域限制在 src 和 node_module 中
@@ -72,7 +88,7 @@ module.exports = {
       filename: 'static/css/[name].[chunkhash:8].css',
       chunkFilename: 'static/css/[name].[chunkhash:8].chunk.css'
     }),
-    new InterpolateHtmlPlugin(env.raw),
+    new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
     // 区别开发模式和发布模式的全局变量
     new webpack.DefinePlugin(env.stringified),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
@@ -80,21 +96,20 @@ module.exports = {
   module: {
     strictExportPresence: true,
     rules: [
-      {
-        test: /\.(js|jsx)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              formatter: eslintFormatter,
-              eslintPath: require.resolve('eslint')
-            },
-            loader: require.resolve('eslint-loader')
-          }
-        ],
-        include: paths.appSrc
-      },
-
+      // {
+      //   test: /\.(js|jsx)$/,
+      //   enforce: 'pre',
+      //   use: [
+      //     {
+      //       options: {
+      //         formatter: eslintFormatter,
+      //         eslintPath: require.resolve('eslint')
+      //       },
+      //       loader: require.resolve('eslint-loader')
+      //     }
+      //   ],
+      //   include: paths.appSrc
+      // },
       {
         // 使用第一个规则匹配
         oneOf: [
