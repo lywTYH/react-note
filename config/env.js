@@ -15,17 +15,17 @@ const dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
   `${paths.dotenv}.${NODE_ENV}`,
   NODE_ENV !== 'test' && `${paths.dotenv}.local`,
-  paths.dotenv
+  paths.dotenv,
 ].filter(Boolean);
 
 // Load environment variables from .env* files. Suppress warnings using silent
 // if this file is missing. dotenv will never modify any environment variables
 // that have already been set.
 // https://github.com/motdotla/dotenv
-dotenvFiles.forEach((dotenvFile) => {
+dotenvFiles.forEach(dotenvFile => {
   if (fs.existsSync(dotenvFile)) {
     require('dotenv').config({
-      path: dotenvFile
+      path: dotenvFile,
     });
   }
 });
@@ -55,20 +55,19 @@ function getClientEnvironment() {
     .filter(key => REACT_APP.test(key))
     .reduce(
       (env, key) => {
-        env[key] = process.env[key];
+        env[key] = process.env[key]; // eslint-disable-line
         return env;
       },
       {
         NODE_ENV: process.env.NODE_ENV || 'development',
-        PUBLIC_URL: process.env.PUBLIC_URL || ''
+        PUBLIC_URL: process.env.PUBLIC_URL || '/',
       }
     );
-  // Stringify all values so we can feed into Webpack DefinePlugin
   const stringified = {
     'process.env': Object.keys(raw).reduce((env, key) => {
-      env[key] = JSON.stringify(raw[key]);
+      env[key] = JSON.stringify(raw[key]); // eslint-disable-line
       return env;
-    }, {})
+    }, {}),
   };
 
   return { raw, stringified };

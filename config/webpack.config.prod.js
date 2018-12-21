@@ -13,18 +13,17 @@ const paths = require('./paths');
 const webpackConfig = merge(
   {
     mode: 'production',
-    // 当 webpack 遇到第一个错，标红抛出并中断运行
     bail: true,
     devtool: false,
     entry: [paths.appIndexJs],
     output: {
       filename: 'static/js/[name].[chunkhash:8].js',
-      chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js'
+      chunkFilename: 'static/js/[name].[chunkhash:8].chunk.js',
     },
     optimization: {
       minimize: true,
       runtimeChunk: {
-        name: 'manifest'
+        name: 'manifest',
       },
       splitChunks: {
         cacheGroups: {
@@ -32,7 +31,7 @@ const webpackConfig = merge(
             chunks: 'initial',
             minChunks: 2,
             maxInitialRequests: 5, // The default limit is too small to showcase the effect
-            minSize: 0 // This is example is too small to create commons chunks
+            minSize: 0, // This is example is too small to create commons chunks
           },
           vendor: {
             // 基础类库
@@ -40,17 +39,17 @@ const webpackConfig = merge(
             test: /[\\/]node_modules[\\/]/,
             name: 'vendor',
             priority: 10,
-            enforce: true
-          }
-        }
-      }
+            enforce: true,
+          },
+        },
+      },
     },
     plugins: [
       // minify css
       new OptimizeCss({
         cssProcessor: require('cssnano'),
         cssProcessorOptions: { discardComments: { removeAll: true } },
-        canPrint: true
+        canPrint: true,
       }),
       new HtmlWebpackPlugin({
         filename: 'index.html',
@@ -66,14 +65,14 @@ const webpackConfig = merge(
           keepClosingSlash: true,
           minifyJS: true,
           minifyCSS: true,
-          minifyURLs: true
-        }
+          minifyURLs: true,
+        },
       }),
       // Generate a manifest file which contains a mapping of all asset filenames
       // to their corresponding output file so that tools can pick it up without
       // having to parse `index.html`.
       new ManifestPlugin({
-        fileName: 'asset-manifest.json'
+        fileName: 'asset-manifest.json',
       }),
       // 生成一个能预缓存的 service worker，同时它能保持更新
       new SWPrecacheWebpackPlugin({
@@ -98,10 +97,10 @@ const webpackConfig = merge(
         // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
         navigateFallbackWhitelist: [/^(?!\/__).*/],
         // Don't precache sourcemaps (they're large) and build asset manifest:
-        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/]
+        staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
       }),
-      new BundleAnalyzerPlugin()
-    ]
+      new BundleAnalyzerPlugin(),
+    ],
   },
   webpackBase
 );
