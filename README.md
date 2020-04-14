@@ -1,8 +1,3 @@
-#react antd
-react
-redux-thunk
-react-redux
-react-router
-react-router-redux
+#react note
 
-持续集成
+my react note

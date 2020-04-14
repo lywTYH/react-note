@@ -1,0 +1,14 @@
+{
+  "extends": ["react-app", "prettier/@typescript-eslint"],
+  "overrides": [
+    {
+      "files": ["**/*.ts?(x)"],
+      "rules": {
+        "no-shadow": "error",
+        "react/self-closing-comp": "error",
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "@typescript-eslint/no-explicit-any": "error"
+      }
+    }
+  ]
+}

@@ -1,106 +1,59 @@
 {
-  "name": "react-dashboard-admin",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "note",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "ncu": "ncu -a",
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom",
-    "lint": "eslint scripts/start.js"
+    "start": "react-scripts start",
+    "test": "react-scripts test",
+    "lint": "eslint './src/**/*.{ts,tsx}'",
+    "lint-staged:ts": "eslint",
+    "lint-locales": "ts-node -O {\\\"module\\\":\\\"commonjs\\\"} scripts/lint-locales.ts"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
+    "@types/jest": "^25.2.1",
     "lodash": "^4.17.11",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "3.4.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.1.0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-proposal-decorators": "^7.1.0",
-    "@babel/plugin-proposal-do-expressions": "^7.0.0",
-    "@babel/plugin-proposal-export-default-from": "^7.0.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.0.0",
-    "@babel/plugin-proposal-function-sent": "^7.1.0",
-    "@babel/plugin-proposal-json-strings": "^7.0.0",
-    "@babel/plugin-proposal-logical-assignment-operators": "^7.0.0",
-    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.0.0",
-    "@babel/plugin-proposal-numeric-separator": "^7.0.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.0.0",
-    "@babel/plugin-proposal-pipeline-operator": "^7.0.0",
-    "@babel/plugin-proposal-throw-expressions": "^7.0.0",
-    "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/plugin-syntax-import-meta": "^7.0.0",
-    "@babel/plugin-transform-runtime": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "analyze-webpack-plugin": "^0.2.5",
-    "autoprefixer": "^9.1.5",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-eslint": "^9.0.0",
-    "babel-loader": "^8.0.2",
-    "babel-plugin-import": "^1.9.1",
-    "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "chalk": "^2.4.1",
-    "css-loader": "^1.0.0",
-    "cssnano": "^4.1.0",
-    "dotenv": "^6.0.0",
-    "eslint": "^5.6.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-babel": "^5.2.0",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.11.1",
-    "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^2.0.0",
-    "fs-extra": "^7.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "jest": "^23.6.0",
-    "less": "^3.8.1",
-    "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.3",
-    "node-sass": "^4.9.3",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "postcss-loader": "^3.0.0",
-    "react-dev-utils": "^6.0.0-next.3e165448",
-    "sass": "^1.14.0",
-    "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0",
-    "sw-precache-webpack-plugin": "^0.11.5",
-    "url-loader": "^1.1.1",
-    "webpack": "^4.19.1",
-    "webpack-bundle-analyzer": "^3.0.2",
-    "webpack-dev-server": "^3.1.8",
-    "webpack-manifest-plugin": "^2.0.4",
-    "webpack-merge": "^4.1.4"
+    "@babel/core": "^7.4.5",
+    "@types/enzyme": "^3.9.3",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/node": "^12.0.7",
+    "@types/react": "^16.9.16",
+    "@types/react-dom": "^16.9.4",
+    "@types/react-router-dom": "^4.3.3",
+    "babel-loader": "^8.0.5",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint-config-prettier": "^6.7.0",
+    "husky": "^2.4.0",
+    "lint-staged": "^8.2.0",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.19.1",
+    "react-docgen-typescript-loader": "^3.1.0",
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "typescript": "^3.7.3"
+  },
+  "engines": {
+    "node": ">=8.0.0"
   },
   "browserslist": [
-    ">1%",
-    "last 4 versions",
-    "Firefox ESR",
-    "not ie < 9"
+    "> 1%",
+    "last 2 versions"
   ],
-  "proxy": {
-    "/api": {
-      "target": "<url_1>",
-      "ws": true
-    },
-    "/foo": {
-      "target": "<url_2>",
-      "ssl": true,
-      "pathRewrite": {
-        "^/foo": "/foo/beta"
-      }
-    },
-    "/bar/[^/]*[.]html": {
-      "target": "<url_3>"
-    },
-    "/baz/.*/.*[.]html": {
-      "target": "<url_4>"
+  "lint-staged": {
+    "**/*.{js,ts,tsx,json,jsx}": [
+      "prettier --config .prettierrc --write",
+      "git add"
+    ],
+    "**/*.{ts,tsx}": "npm run lint-staged:ts"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   }
 }
