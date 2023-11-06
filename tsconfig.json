@@ -19,7 +19,6 @@
     "noImplicitAny": true,
     "importHelpers": true,
     "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
     "allowSyntheticDefaultImports": true,
