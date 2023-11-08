@@ -1,7 +1,5 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "baseUrl": "src",
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -24,8 +22,13 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "downlevelIteration": true
+    "downlevelIteration": true,
+    "baseUrl": ".",
+    "paths": {
+      "zustand": ["./src/index.ts"],
+      "zustand/*": ["./src/*.ts"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["node_modules", "build", "mock"]
+  "include": ["src/**/*", "tests/**/*"],
+  "exclude": ["node_modules", "dist", "mock"]
 }
